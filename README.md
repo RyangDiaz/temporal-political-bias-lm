@@ -8,6 +8,8 @@ Create the necessary environment using Conda:
 
 `conda env create -n csci5541project --file environment.yml`
 
+Unzip the given `data.zip` file to have access to all the data used for this project.
+
 ## Functionality
 
 **Sanity Check**: To run politicalBiasBERT on the test set used in Baly et al. 2020 [1], 

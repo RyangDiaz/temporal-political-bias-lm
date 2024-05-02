@@ -1,0 +1,6 @@
+__pycache__/
+output/
+LIME_output/
+data/
+
+.DS_Store
