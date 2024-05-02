@@ -25,3 +25,7 @@ where `DATASET` can be one of `['fox_news', 'tucker', 'lemon', 'nyt', 'cnn_ltm',
 `python transcripts_inference.py --dataset DATASET --filter_cnn FILTER_CNN`
 
 where `DATASET` can be one of `['fox_news', 'tucker', 'lemon', 'nyt', 'cnn_ltm', 'cnn_lad']` and `FILTER_CNN` can be either `True` or `False`
+
+\[1\] Ramy Baly, Giovanni Da San Martino, James Glass, and Preslav Nakov. 2020. We Can Detect Your Bias: Predicting the Political Ideology of News Articles. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 4982–4991, Online. Association for Computational Linguistics.
+
+\[2\] M. T. Ribeiro, S. Singh, and C. Guestrin, “”why should I trust you?”: Explaining the predictions of any classifier,” in Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, San Francisco, CA, USA, August 13-17, 2016, pp. 1135–1144, 2016.
