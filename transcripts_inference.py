@@ -5,6 +5,7 @@ import glob
 import csv
 import argparse
 import sys
+import os
 
 csv.field_size_limit(sys.maxsize)
 
@@ -126,6 +127,8 @@ if __name__ == '__main__':
     parser.add_argument('--dataset', default='tucker')
     parser.add_argument('--filter_cnn', action='store_true', default=False)
     args = parser.parse_args()
+
+    os.makedir('output', exist_ok=True)
 
     tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
     model = AutoModelForSequenceClassification.from_pretrained("bucketresearch/politicalBiasBERT").to('cuda')

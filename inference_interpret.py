@@ -5,6 +5,7 @@ import glob
 import csv
 from lime.lime_text import LimeTextExplainer
 import numpy as np
+import argparse
 
 from transcripts_inference import import_transcripts_by_year
 
@@ -45,10 +46,12 @@ def interpret_transcripts(transcripts, year, explainer, csv_file_path, filter_cn
             exp_list = exp.as_list(label=pred)
             writer.writerow([year, date, transcript, index_to_class(pred)] + [exp[0] for exp in exp_list] + [[exp[1] for exp in exp_list]])
 
-def main():
-    dataset = 'cnn_lad'
-    csv_file_path = f'output/lime_outputs_{dataset}.csv'
-    filter_cnn = True
+def main(args):
+    dataset = args.dataset
+    csv_file_path = f'LIME_output/lime_outputs_{dataset}.csv'
+    filter_cnn = args.filter_cnn
+
+    os.makedir('LIME_output', exist_ok=True)
 
     transcripts = import_transcripts_by_year(dataset=dataset)
 
@@ -59,7 +62,7 @@ def main():
         writer = csv.writer(file)
         writer.writerow(['Year', 'Date', 'Text', 'Prediction', 'Explainer 1', 'Explainer 2', 'Explainer 3', 'Explainer 4', 'Explainer 5', 'Explainer 6', 'Scores'])
 
-    for year in [2002, 2003]:
+    for year in range(min([int(year) for year in transcripts.keys()]),max([int(year) for year in transcripts.keys()])+1):
         interpret_transcripts(
             transcripts=transcripts,
             year=year,
@@ -68,30 +71,34 @@ def main():
             filter_cnn=True
         )
 
-def main1():
-    dataset = 'cnn_lad'
-    filter_cnn = True
+# def main1():
+#     dataset = 'cnn_lad'
+#     filter_cnn = True
 
-    transcripts = import_transcripts_by_year(dataset=dataset)
-    # sample = transcripts['2002'][45]['transcript']
-    sample = transcripts['2003'][84]['transcript']
+#     transcripts = import_transcripts_by_year(dataset=dataset)
+#     # sample = transcripts['2002'][45]['transcript']
+#     sample = transcripts['2003'][84]['transcript']
 
-    if filter_cnn:
-        sample = sample.replace('CNN', 'News Network')
+#     if filter_cnn:
+#         sample = sample.replace('CNN', 'News Network')
 
-    class_names = ['left', 'center', 'right']
-    explainer = LimeTextExplainer(class_names=class_names)
+#     class_names = ['left', 'center', 'right']
+#     explainer = LimeTextExplainer(class_names=class_names)
 
-    print(predict_prob(sample))
-    exp = explainer.explain_instance(sample, predict_prob, num_features=6, num_samples=30, top_labels=3) # 30
-    print(exp.as_list())
+#     print(predict_prob(sample))
+#     exp = explainer.explain_instance(sample, predict_prob, num_features=6, num_samples=30, top_labels=3) # 30
+#     print(exp.as_list())
 
-    if filter_cnn:
-        filename = f'LIME_output/{dataset}_filtered_new.html'
-    else:
-        filename = f'LIME_output/{dataset}_new.html'
+#     if filter_cnn:
+#         filename = f'LIME_output/{dataset}_filtered_new.html'
+#     else:
+#         filename = f'LIME_output/{dataset}_new.html'
 
-    exp.save_to_file(filename, text=True)
+#     exp.save_to_file(filename, text=True)
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', default='tucker')
+    parser.add_argument('--filter_cnn', action='store_true', default=False)
+    args = parser.parse_args()
+    main(args)
