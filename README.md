@@ -28,6 +28,15 @@ where `DATASET` can be one of `['fox_news', 'tucker', 'lemon', 'nyt', 'cnn_ltm',
 
 where `DATASET` can be one of `['fox_news', 'tucker', 'lemon', 'nyt', 'cnn_ltm', 'cnn_lad']` and `FILTER_CNN` can be either `True` or `False`
 
+### References
+
 \[1\] Ramy Baly, Giovanni Da San Martino, James Glass, and Preslav Nakov. 2020. We Can Detect Your Bias: Predicting the Political Ideology of News Articles. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 4982–4991, Online. Association for Computational Linguistics.
 
 \[2\] M. T. Ribeiro, S. Singh, and C. Guestrin, “”why should I trust you?”: Explaining the predictions of any classifier,” in Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, San Francisco, CA, USA, August 13-17, 2016, pp. 1135–1144, 2016.
+
+Additionally, we would like to thank
+
+1. https://github.com/susannapaoli/web-scraper-nyt
+2. https://developer.nytimes.com/docs/archive-product/1/overview
+
+off of which the majority of our web-scraping scripts are built off of.
